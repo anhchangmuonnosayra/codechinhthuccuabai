@@ -1,0 +1,74 @@
+    <!-- Footer -->
+    <footer class="bg-[var(--dark)] py-12">
+        <div class="container mx-auto px-4 text-white">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Liên Hệ</h3>
+                    <p><i class="fas fa-phone mr-2"></i> +123 456 789</p>
+                    <p><i class="fas fa-envelope mr-2"></i> info@3bropack.com</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 123 Đường Thể Thao</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Giờ Hoạt Động</h3>
+                    <p><i class="fas fa-clock mr-2"></i> T2-T6: 9:00 - 20:00</p>
+                    <p><i class="fas fa-clock mr-2"></i> T7: 10:00 - 18:00</p>
+                    <p><i class="fas fa-clock mr-2"></i> CN: Đóng cửa</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Chi Nhánh</h3>
+                    <p><i class="fas fa-store mr-2"></i> 456 Đường Thể Thao</p>
+                    <p><i class="fas fa-store mr-2"></i> 789 Đường Thể Thao</p>
+                    <p><i class="fas fa-store mr-2"></i> 101 Đường Thể Thao</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Dịch Vụ</h3>
+                    <p><i class="fas fa-shipping-fast mr-2"></i> Giao hàng nhanh</p>
+                    <p><i class="fas fa-undo mr-2"></i> Đổi trả 30 ngày</p>
+                    <p><i class="fas fa-headset mr-2"></i> Hỗ trợ 24/7</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    // Lấy 5 sản phẩm ngẫu nhiên
+$sql_random_products = "SELECT * FROM product ORDER BY RAND() LIMIT 5";
+$result_random_products = mysqli_query($conn, $sql_random_products);
+$random_products = [];
+while ($row = mysqli_fetch_assoc($result_random_products)) {
+    $random_products[] = $row;
+}
+
+
+<!-- Top Bar -->
+<div class="top-bar py-3">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <img alt="Logo" class="h-10 w-10 mr-3" src="3propack-removebg-preview.png"/>
+            <span class="font-extrabold text-xl tracking-wider">3BROPACK</span>
+        </div>
+        <div class="flex space-x-6 text-sm">
+            <div class="flex items-center"><i class="fas fa-money-bill-wave mr-2"></i>Thanh toán COD</div>
+            <div class="flex items-center"><i class="fas fa-truck mr-2"></i>Giao hàng toàn quốc</div>
+            <div class="flex items-center"><i class="fas fa-undo mr-2"></i>Đổi trả 3 ngày</div>
+            <?php if (isset($_SESSION['username'])): ?>
+                <div class="flex items-center">
+                    <span class="font-semibold">Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
+                    <a class="ml-4 hover:text-pink-200 transition" href="logout.php">Đăng xuất</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="flex justify-between items-center">
+    <button class="btn-add text-white px-4 py-2 rounded-full text-sm font-semibold transition">Thêm vào Giỏ</button>
+    <div class="flex gap-3">
+        <a class="text-gray-400 hover:text-pink-500 transition" href="#" title="Yêu Thích"><i class="fas fa-heart"></i></a>
+        <a class="text-gray-400 hover:text-pink-500 transition" href="product_detail_quanao.php?id=<?php echo $product['id']; ?>" title="Chi Tiết"><i class="fas fa-info-circle"></i></a>
+    </div>
+</div>

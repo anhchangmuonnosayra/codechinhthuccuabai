@@ -1,0 +1,24 @@
+<?php
+include 'db_connect.php';
+$sql_notifications = "SELECT * FROM notifications WHERE is_active = 1";
+$result_notifications = mysqli_query($conn, $sql_notifications);
+?>
+
+<?php while ($notification = mysqli_fetch_assoc($result_notifications)): ?>
+    <div id="notification_<?php echo $notification['id']; ?>" class="fixed top-5 right-5 bg-blue-600 text-white p-4 rounded-lg shadow-lg z-50 max-w-sm">
+        <div class="flex justify-between items-center">
+            <div>
+                <h2 class="text-lg font-bold"><?php echo htmlspecialchars($notification['title']); ?></h2>
+                <p><?php echo htmlspecialchars($notification['content']); ?></p>
+            </div>
+            <button onclick="document.getElementById('notification_<?php echo $notification['id']; ?>').style.display='none'" class="ml-4 text-white text-xl font-bold">×</button>
+        </div>
+    </div>
+    <?php if ($notification['auto_close'] > 0): ?>
+        <script>
+            setTimeout(() => {
+                document.getElementById('notification_<?php echo $notification['id']; ?>').style.display = 'none';
+            }, <?php echo $notification['auto_close'] * 1000; ?>);
+        </script>
+    <?php endif; ?>
+<?php endwhile; ?>
